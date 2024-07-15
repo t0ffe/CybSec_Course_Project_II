@@ -10,7 +10,7 @@ This report details the penetration testing performed on the [Metasploitable 3 (
 
 **Component Targeted:** Shellshock Bash Vulnerability / Apache web server with CGI scripts
 
-**Execution Method:** This exploits the Shellshock vulnerability, a flaw in how the Bash shell handles external environment variables. It targets CGI scripts in the Apache web server by setting the HTTP_USER_AGENT environment variable to a malicious function definition. [CVE-2014-6271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271)
+**Execution Method:** This attack exploits the Shellshock vulnerability, a flaw in how the Bash shell handles external environment variables. It targets CGI scripts in the Apache web server by setting the HTTP_USER_AGENT environment variable to a malicious function definition. [CVE-2014-6271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271)
 
 **Steps in Metasploit:**
 1. Select the exploit: `use exploit/multi/http/apache_mod_cgi_bash_env_exec`
