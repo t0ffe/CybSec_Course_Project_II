@@ -77,3 +77,13 @@ usermod -a -G lpadmin vagrant
 [**] [1:1768:7] WEB-IIS header field buffer overflow attempt [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 172.28.128.1:58864 -> 172.28.128.3:631                                                                
 [**] [1:1768:7] WEB-IIS header field buffer overflow attempt [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 172.28.128.1:58864 -> 172.28.128.3:631 
 ```
+
+
+
+## MISSED ATTACK 1:
+**description**
+
+## MISSED ATTACK 2:
+**description**
+
+## ESSAY: The benefits and shortcomings of using intrusion detection systems
