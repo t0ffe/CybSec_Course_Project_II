@@ -4,6 +4,8 @@
 
 This report details the penetration testing performed on the [Metasploitable 3 (Linux)](https://github.com/rapid7/metasploitable3) operating system using [Metasploit](https://www.metasploit.com/). Five different attacks were carried out, with three being identifiable by the [Snort](https://www.snort.org/) Intrusion Detection System (IDS) and two going undetected. The report provides a brief description of each attack, including the targeted component, execution method, and Snort output for detected attacks. Additionally, it includes an essay on the benefits and shortcomings of using intrusion detection systems.
 
+
+
 ## IDENTIFIED ATTACK 1: Apache HTTP Server RCE
 
 ### Description
@@ -25,6 +27,7 @@ This report details the penetration testing performed on the [Metasploitable 3 (
 [**] [1:100000122:1] COMMUNITY WEB-MISC mod_jrun overflow attempt [**]                                            [Classification: Web Application Attack]                 [Priority: 1] {TCP} 172.28.128.1:56642 -> 172.28.128.3:80                                                            
 [**] [1:2022028:1] ET WEB_SERVER Possible CVE-2014-6271 Attempt [**]                                              [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 172.28.128.1:56643 -> 172.28.128.3:80 
 ```
+
 
 
 ## IDENTIFIED ATTACK 2: Drupal Drupageddon
@@ -80,8 +83,26 @@ usermod -a -G lpadmin vagrant
 
 
 
-## MISSED ATTACK 1:
-**description**
+## MISSED ATTACK 1: Apache Continuum Arbitrary Command Execution
+
+### Description
+
+**Component Targeted:** Apache Continuum
+
+**Execution Method:** By injecting a command into the installation.varValue POST parameter to /continuum/saveInstallation.action, a shell can be spawned.
+
+**Steps in Metasploit:**
+1. Select the exploit: `use linux/http/apache_continuum_cmd_exec`
+2. Set the target IP: `set RHOSTS <target_ip>`
+3. Execute the attack: `run`
+
+**Reason for Missing:** It is likely that Snort missed this attack because the method employed is generally considered non-malicious and therefore may not be explicitly covered by existing rules. Or it is not included in the community rules.
+Only thing Snort notice was:
+```
+[**] [1:620:10] SCAN Proxy Port 8080 attempt [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 172.28.128.1:58585 -> 172.28.128.3:8080
+```
+which is a port scan notification (same you would get for using `nmap`) and by the instructions of the course __"[...] does *not* count as an attack"__.
+
 
 ## MISSED ATTACK 2:
 **description**
