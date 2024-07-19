@@ -96,7 +96,7 @@ usermod -a -G lpadmin vagrant
 2. Set the target IP: `set RHOSTS <target_ip>`
 3. Execute the attack: `run`
 
-**Reason for Missing:** It is likely that Snort missed this attack because the method employed is generally considered non-malicious and therefore may not be explicitly covered by existing rules. Or it is not included in the community rules.
+**Reason for Missing:** Snort missed this attack because `rules/policy-other.rules` was not in use. (as per the [snort.conf](https://cybersecuritybase.mooc.fi/19231e84dafffa079550777b17d8fb3e/snort.conf) provided by the course)
 Only thing Snort notice was:
 ```
 [**] [1:620:10] SCAN Proxy Port 8080 attempt [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 172.28.128.1:58585 -> 172.28.128.3:8080
