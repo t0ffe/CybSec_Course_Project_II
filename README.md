@@ -129,4 +129,28 @@ As I was unable to find another attack that Snort could not identify I had to di
 ```
 After that, Snort was no longer able to identify or detect the exploit.
 
-## ESSAY: The benefits and shortcomings of using intrusion detection systems
+
+## ESSAY: The Benefits and Shortcomings of Using Intrusion Detection Systems
+
+Intrusion Detection Systems (IDS) are essential components in the cybersecurity infrastructure, designed to detect unauthorized access or anomalies within network traffic. They come in two main types: Network-based IDS (NIDS) and Host-based IDS (HIDS). While NIDS monitors network traffic for suspicious activities, HIDS focuses on monitoring and analyzing the internals of computing devices.
+
+### Benefits of IDS
+
+IDS can detect threats at an early stage, potentially stopping attacks before they cause significant damage. This early detection helps in minimizing the impact and cost of security breaches and maintain the integrity and availability of critical systems. As IDS provide real-time monitoring of network traffic they can alert administrators to suspicious activities as they happen, allowing for prompt responses to potential threats.
+
+IDS offer visibility into network traffic and user activity, which helps in identifying patterns, understanding attack vectors, and improving overall security postures.
+
+IDS supports regulatory compliance by providing logs and reports necessary for audits. Organizations can demonstrate that they are actively monitoring and protecting their systems, which is a requirement for many industry standards. The logs can also be utilized for post-incident analysis, aiding security teams in understanding the attack's scope, identifying compromised systems, and developing strategies to prevent future incidents.
+
+### Shortcomings of IDS
+
+One of the significant challenges with IDS is the high rate of false positives where legitimate activities are flagged as malicious. This can lead to alert fatigue, potentially causing real threats to be overlooked. Conversely, IDS may also fail to detect actual attacks (false negatives), especially if the attack techniques are new or sophisticated.
+
+Managing an IDS requires skilled personnel who can interpret alerts and respond appropriately. This adds to the operational complexity and costs for organizations. IDS also require regular updates and fine-tuning to maintain effectiveness. This includes updating signature databases, configuring rules, and adjusting thresholds to balance detection capabilities with the rate of false positives and negatives.
+
+IDS can be resource-intensive, requiring substantial computational power and storage to analyze and log network traffic. This can be particularly challenging for large organizations with high volumes of data.
+Additionally, IDS often operates with limited context, focusing solely on network traffic or host activities. This can result in incomplete threat detection, as it may not correlate data from different sources or understand the broader context of an attack, such as social engineering.
+
+### Conclusion
+
+Intrusion Detection Systems are crucial for cybersecurity, offering benefits such as early threat detection, real-time monitoring, and regulatory compliance. However, they also present challenges like false positives, resource demands, and management complexity. To optimize their effectiveness, IDS should be integrated into a broader security strategy that includes regular updates, employee training, and other security measures.
